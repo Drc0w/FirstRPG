@@ -9,4 +9,4 @@ we just wanna have some fun.
 So we decided to make a little RPG game with characters and ennemies. The goal
 of the RPG is to evolve one or two characters by fighting some ennemies.
 
-Enjoy :)
+Enjoy our video game :)
