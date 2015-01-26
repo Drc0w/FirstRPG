@@ -7,12 +7,15 @@ using namespace std;
 
 int main()
 {
-	Personnage me("PHP"), him("Test");
-	me.Attack(him);
+	Personnage *me, *him;
+	me = new Personnage("PHP");
+	him = new Personnage("Test");
+	me->Attack(*him);
 	Potion potionoflife("Potion de vie", 200);
-	him.DrinkPotion(potionoflife);
-	Weapon new_weapon("Epée de la mort qui tue", 100);
-	me.ChangeWeapon(new_weapon);
-	me.Attack(him);
+	him->DrinkPotion(potionoflife);
+	me->ChangeWeapon("Epée de la mort qui tue", 150);
+	me->Attack(*him);
+	delete me;
+	delete him;
 	return 0;
 }

@@ -2,6 +2,12 @@
 
 using namespace std;
 
+Weapon::Weapon()
+	:weaponName("Hands"), weaponDamages(5)
+{
+
+}
+
 Weapon::Weapon(const string name, const int damages) 
 	:weaponName(name), weaponDamages(damages)
 {

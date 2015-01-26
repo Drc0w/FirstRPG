@@ -8,6 +8,7 @@ class Weapon
 {
 	public:
 
+	Weapon();
 	Weapon(const std::string name, const int damages);
 	Weapon(const Weapon &src);
 	std::string Name() const;

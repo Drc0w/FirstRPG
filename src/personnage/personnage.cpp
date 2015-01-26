@@ -4,15 +4,15 @@
 using namespace std;
 
 Personnage::Personnage(const string name) 
-	:charName(name), charLife(100), charMaxLife(100), charMana(100), charWeapon("Hands", 5)
+	:charName(name), charLife(100), charMaxLife(100), charMana(100)
 {
-
+	charWeapon = new Weapon();
 }
 
 Personnage::Personnage(const Personnage &src) 
-	:charName(src.Name()), charLife(src.RemainingLife()), charMaxLife(100), charMana(src.Mana()), charWeapon(src.GetWeapon())
+	:charName(src.Name()), charLife(src.RemainingLife()), charMaxLife(100), charMana(src.Mana())
 {
-
+	charWeapon = new Weapon(src.GetWeapon()->Name(), src.GetWeapon()->Damages());
 }
 
 void Personnage::TakeDamages(const int damages)
@@ -40,21 +40,20 @@ void Personnage::DrinkPotion(const Potion potion)
 
 void Personnage::ChangeWeapon(const std::string new_name, const int new_damages)
 {
-	Weapon weapon(new_name, new_damages);
-	charWeapon = weapon;
-	cout << charName << " changes his weapon: " << charWeapon.Name() << ", damages: " << charWeapon.Damages() << endl;
+	charWeapon = new Weapon(new_name, new_damages);
+	cout << charName << " changed his weapon: " << charWeapon->Name() << ", damages: " << charWeapon->Damages() << endl;
 }
 
-void Personnage::ChangeWeapon(const Weapon weapon)
+void Personnage::ChangeWeapon(const Weapon *weapon)
 {
-	charWeapon = weapon;
-	cout << charName << " changes his weapon: " << charWeapon.Name() << ", damages: " << charWeapon.Damages() << endl;
+	charWeapon = new Weapon(weapon->Name(), weapon->Damages());
+	cout << charName << " changes his weapon: " << charWeapon->Name() << ", damages: " << charWeapon->Damages() << endl;
 }
 
 void Personnage::Attack(Personnage &cible)
 {
-	cout << charName + " attacks " + cible.Name() + " with " + charWeapon.Name() << endl;
-	cible.TakeDamages(charWeapon.Damages());
+	cout << charName + " attacks " + cible.Name() + " with " + charWeapon->Name() << endl;
+	cible.TakeDamages(charWeapon->Damages());
 	if (cible.IsAlive())
 	{
 		cout << "The ennemy has " << cible.RemainingLife() << " HP left" << endl;
@@ -85,8 +84,12 @@ int Personnage::RemainingLife() const
 	return charLife;
 }
 
-Weapon Personnage::GetWeapon()  const
+Weapon* Personnage::GetWeapon()  const
 {
 	return charWeapon;
 }
 
+Personnage::~Personnage()
+{
+	delete charWeapon;
+}
