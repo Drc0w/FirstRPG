@@ -8,6 +8,7 @@ using namespace std;
 
 int main()
 {
+	ClearConsole();
 	cout << "Enter the name of your character: ";
 	string name;
 	cin >> name;

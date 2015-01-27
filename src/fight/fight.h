@@ -7,6 +7,7 @@
 #include "../personnage/weapon.h"
 #include <cstdlib>
 
+void ClearConsole();
 void Fight(Personnage *main, Personnage *ennemy);
 
 #endif

@@ -2,6 +2,15 @@
 
 using namespace std;
 
+void ClearConsole()
+{
+	#ifdef __WINDOWS__
+		system("cls");
+	#elif __linux__
+		system("clear");
+	#endif
+}
+
 void PrintInformations(const Personnage *main, const Personnage *ennemy)
 {
 	cout << main->Name() << " is fighting against " << ennemy->Name() << endl;
@@ -15,7 +24,7 @@ void PrintInformations(const Personnage *main, const Personnage *ennemy)
 
 void Fight(Personnage *main, Personnage *ennemy)
 {
-	system("clear");
+	ClearConsole();
 	cout << "Un " << ennemy->Name() << " apparait !" << endl;
 	cout << main->Name() << " en avant !" << endl;
 	do
@@ -34,12 +43,12 @@ void Fight(Personnage *main, Personnage *ennemy)
 				switch (answer)
 				{
 					case 1:
-						system("clear");
+						ClearConsole();
 						main->Attack(ennemy);
 						break;
 
 					case 2:
-						system("clear");
+						ClearConsole();
 						PrintInformations(main, ennemy);
 						break;
 
