@@ -50,17 +50,17 @@ void Personnage::ChangeWeapon(const Weapon *weapon)
 	cout << charName << " changes his weapon: " << charWeapon->Name() << ", damages: " << charWeapon->Damages() << endl;
 }
 
-void Personnage::Attack(Personnage &cible)
+void Personnage::Attack(Personnage *cible)
 {
-	cout << charName + " attacks " + cible.Name() + " with " + charWeapon->Name() << endl;
-	cible.TakeDamages(charWeapon->Damages());
-	if (cible.IsAlive())
+	cout << charName + " attacks " + cible->Name() + " with " + charWeapon->Name() << endl;
+	cible->TakeDamages(charWeapon->Damages());
+	if (cible->IsAlive())
 	{
-		cout << "The ennemy has " << cible.RemainingLife() << " HP left" << endl;
+		cout << "The ennemy has " << cible->RemainingLife() << " HP left" << endl;
 	}
 	else
 	{
-		cout << charName <<" killed " << cible.Name() << endl;
+		cout << charName <<" killed " << cible->Name() << endl;
 	}
 }
 

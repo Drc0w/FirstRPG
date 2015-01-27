@@ -2,19 +2,21 @@
 #include "personnage/personnage.h"
 #include "personnage/weapon.h"
 #include "personnage/potion.h"
+#include "fight/fight.h"
 
 using namespace std;
 
 int main()
 {
+	cout << "Enter the name of your character: ";
+	string name;
+	cin >> name;
+	cout << endl;
 	Personnage *me, *him;
-	me = new Personnage("PHP");
-	him = new Personnage("Test");
-	me->Attack(*him);
-	Potion potionoflife("Potion de vie", 200);
-	him->DrinkPotion(potionoflife);
-	me->ChangeWeapon("Epée de la mort qui tue", 150);
-	me->Attack(*him);
+	me = new Personnage(name);
+	me->ChangeWeapon(new Weapon("Epée de folie", 25));
+	him = new Personnage("Gobelin");
+	Fight(me, him);
 	delete me;
 	delete him;
 	return 0;

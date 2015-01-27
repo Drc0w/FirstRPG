@@ -17,7 +17,7 @@ class Personnage
 	void DrinkPotion(const Potion potion);
 	void ChangeWeapon(const std::string name, const int damages);
 	void ChangeWeapon(const Weapon *weapon);
-	void Attack(Personnage &cible);
+	void Attack(Personnage *cible);
 	bool IsAlive() const;
 	std::string Name() const;
 	int RemainingLife() const;
