@@ -4,13 +4,13 @@ using namespace std;
 
 void PrintInformations(const Personnage *main, const Personnage *ennemy)
 {
-	cout << main->Name() << " is fighting agaisnt " << ennemy->Name() << endl;
+	cout << main->Name() << " is fighting against " << ennemy->Name() << endl;
 	Weapon *mainw = main->GetWeapon();
 	cout << main->Name() << " uses " << mainw->Name() << " and deals " << mainw->Damages() << endl;
 	Weapon *ennw = ennemy->GetWeapon();
-	cout << ennemy->Name() << "  uses " << ennw->Name() << " and deals " << ennw->Damages() << endl;
+	cout << ennemy->Name() << " uses " << ennw->Name() << " and deals " << ennw->Damages() << endl;
 	cout << main->Name() << " has " << main->RemainingLife() << "HP left" << endl;
-	cout << ennemy->Name() << "has " << ennemy->RemainingLife() << "HP left" << endl;
+	cout << ennemy->Name() << " has " << ennemy->RemainingLife() << "HP left" << endl;
 }
 
 void Fight(Personnage *main, Personnage *ennemy)
@@ -20,13 +20,13 @@ void Fight(Personnage *main, Personnage *ennemy)
 	cout << main->Name() << " en avant !" << endl;
 	do
 	{
+		int answer;
 		if (main->IsAlive())
 		{
 			cout << endl;
 			cout << "What do you wanna do?" << endl;
 			cout << "1. Attack" << endl;
 			cout << "2. Show info" << endl;
-			int answer;
 			cin >> answer;
 			bool ctinue = false;
 			do
@@ -51,7 +51,7 @@ void Fight(Personnage *main, Personnage *ennemy)
 
 			} while(ctinue);
 		}
-		if (ennemy->IsAlive())
+		if (ennemy->IsAlive() && answer != 2)
 		{
 			ennemy->Attack(main);
 		}
