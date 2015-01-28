@@ -27,6 +27,10 @@ void Fight(Personnage *main, Personnage *ennemy)
 	ClearConsole();
 	cout << "Un " << ennemy->Name() << " apparait !" << endl;
 	cout << main->Name() << " en avant !" << endl;
+	cout << "Test de changement d'arme avec un niveau top élevé" << endl;
+	main->ChangeWeapon(new Weapon("Epée de ouf !!", 195, 20));
+	cout << "Test de changement d'arme avec un niveau correct" << endl;
+	main->ChangeWeapon(new Weapon("Dagounette", 10, 1));
 	do
 	{
 		int answer;

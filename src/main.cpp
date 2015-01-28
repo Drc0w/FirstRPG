@@ -15,9 +15,9 @@ int main()
 	cout << endl;
 	Personnage *me, *him;
 	me = new Personnage(name);
-	me->ChangeWeapon(new Weapon("Epée de folie", 25));
 	him = new Personnage("Gobelin");
 	Fight(me, him);
+	me->WinExperience(10000);
 	delete me;
 	delete him;
 	return 0;

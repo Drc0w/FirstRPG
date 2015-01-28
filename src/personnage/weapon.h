@@ -9,14 +9,16 @@ class Weapon
 	public:
 
 	Weapon();
-	Weapon(const std::string name, const int damages);
+	Weapon(const std::string name, const int damages, const int level);
 	Weapon(const Weapon &src);
 	std::string Name() const;
 	int Damages() const;
+	int Level() const;
 
 	private:
 	std::string weaponName;
 	int weaponDamages;
+	int weaponLevel;
 };
 
 #endif
