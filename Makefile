@@ -20,6 +20,7 @@ clean:
 	rm -f bin/*
 	rm -f src/*.o
 	rm -f src/personnage/*.o
+	rm -f src/fight/*.o
 
 $(OBJ): $(SRCOBJ) moveobj
 	
