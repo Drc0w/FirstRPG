@@ -32,4 +32,5 @@ class Personnage
 	int charMana;
 	Weapon *charWeapon;
 };
+
 #endif

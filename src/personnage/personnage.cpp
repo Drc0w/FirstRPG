@@ -56,7 +56,7 @@ void Personnage::Attack(Personnage *cible)
 	cible->TakeDamages(charWeapon->Damages());
 	if (cible->IsAlive())
 	{
-		cout << "The ennemy has " << cible->RemainingLife() << " HP left" << endl;
+		cout << cible->Name() <<"  has " << cible->RemainingLife() << " HP left" << endl;
 	}
 	else
 	{
