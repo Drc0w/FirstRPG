@@ -22,7 +22,7 @@ struct list<T>* ListAdd(T *element, struct list<T> *list)
 	struct list<T> *l = list;
 	if (l == NULL)
 	{
-		l = new struct list<T>();
+		l = (struct list<T>*)malloc(sizeof(struct list<T>));
 		l->element = element;
 		l->index = 0;
 		l->next = NULL;
@@ -31,10 +31,11 @@ struct list<T>* ListAdd(T *element, struct list<T> *list)
 	else
 	{
 		for (; l->next != NULL; l = l->next);
-		l->next = new struct list<T>();
+		l->next = (struct list<T>*)malloc(sizeof(struct list<T>));
+		struct list<T> *tmp = l;
 		l = l->next;
 		l->element = element;
-		l->index = l->index + 1;
+		l->index = tmp->index + 1;
 		l->next = NULL;
 	}
 	return list;
@@ -46,12 +47,21 @@ void ListRemoveAt(int index, struct list<T> *list)
 	struct list<T> *l = list;
 	if (index < ListCountElements(l))
 	{
-		for (int i = 0; i < index; i++, l = l->next);
-		struct list<T> *tmp = l->next;
-		l->next = tmp->next;
-		free(tmp);
-		l = l->next;
-		for (; l->next != NULL; l->index++, l = l->next);
+		for (; l != NULL && l->next != NULL; l = l->next)
+		{
+			if (l->next->index == index)
+			{
+				struct list<T> *tmp = l->next;
+				delete(tmp->element);
+				l->next = tmp->next;
+				free(tmp);
+				break;
+			}
+		}
+		for (; l != NULL; l = l->next)
+		{
+			l->index--;
+		}
 	}
 	else
 		cout << index << " out of bounds in RemoveAt(int index, struct list *list)" << endl;

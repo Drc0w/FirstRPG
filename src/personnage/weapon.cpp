@@ -34,3 +34,14 @@ int Weapon::Level() const
 {
 	return weaponLevel;
 }
+
+struct list<Weapon>* ListOfWeapon()
+{
+	struct list<Weapon> *weapons = NULL;
+	Weapon *weapon = new Weapon("Dagounette", 10, 1);
+	weapons = ListAdd(weapon, weapons);
+	weapon = new Weapon("Arme2", 20, 2);
+	weapons = ListAdd(weapon, weapons);
+	ListRemoveAt(1, weapons);
+	return weapons;
+}

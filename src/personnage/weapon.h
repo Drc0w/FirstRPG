@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "../list/list.h"
 
 class Weapon
 {
@@ -20,5 +21,7 @@ class Weapon
 	int weaponDamages;
 	int weaponLevel;
 };
+
+struct list<Weapon>* ListOfWeapon();
 
 #endif

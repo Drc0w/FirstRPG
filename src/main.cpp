@@ -3,6 +3,7 @@
 #include "personnage/weapon.h"
 #include "personnage/potion.h"
 #include "fight/fight.h"
+#include "list/list.h"
 
 using namespace std;
 

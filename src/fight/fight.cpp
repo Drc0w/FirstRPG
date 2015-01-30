@@ -25,6 +25,7 @@ void PrintInformations(const Personnage *main, const Personnage *ennemy)
 void Fight(Personnage *main, Personnage *ennemy)
 {
 	ClearConsole();
+	struct list<Weapon> *weapons = ListOfWeapon();
 	cout << "Un " << ennemy->Name() << " apparait !" << endl;
 	cout << main->Name() << " en avant !" << endl;
 	cout << "Test de changement d'arme avec un niveau top élevé" << endl;
@@ -40,6 +41,7 @@ void Fight(Personnage *main, Personnage *ennemy)
 			cout << "What do you wanna do?" << endl;
 			cout << "1. Attack" << endl;
 			cout << "2. Show info" << endl;
+			cout << "3. Test affichage d'armes dans une liste" << endl;
 			cin >> answer;
 			bool ctinue = false;
 			do
@@ -55,7 +57,10 @@ void Fight(Personnage *main, Personnage *ennemy)
 						ClearConsole();
 						PrintInformations(main, ennemy);
 						break;
-
+					case 3:
+						ClearConsole();
+						PrintListWeapon(weapons);
+						break;
 					default:
 						cin >> answer;
 						ctinue = true;
@@ -64,9 +69,19 @@ void Fight(Personnage *main, Personnage *ennemy)
 
 			} while(ctinue);
 		}
-		if (ennemy->IsAlive() && answer != 2)
+		if (ennemy->IsAlive() && answer == 1)
 		{
 			ennemy->Attack(main);
 		}
 	} while(main->IsAlive() && ennemy->IsAlive());
+}
+
+void PrintListWeapon(struct list<Weapon> *listofweapons)
+{
+	int listcount = ListCountElements(listofweapons);
+	for (int i = 0; i < listcount; i++)
+	{
+		Weapon *weapon = ListElementAt(i, listofweapons);
+		cout << weapon->Name() << endl;
+	}
 }

@@ -9,5 +9,6 @@
 
 void ClearConsole();
 void Fight(Personnage *main, Personnage *ennemy);
+void PrintListWeapon(struct list<Weapon> *listofweapons);
 
 #endif
