@@ -15,10 +15,9 @@ int main()
 	cin >> name;
 	cout << endl;
 	Personnage *me, *him;
-	me = new Personnage(name);
+	me = new Personnage(name, 3);
 	him = new Personnage("Gobelin");
 	Fight(me, him);
-	me->WinExperience(10000);
 	delete me;
 	delete him;
 	return 0;

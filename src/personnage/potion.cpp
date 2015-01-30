@@ -3,15 +3,15 @@
 using namespace std;
 
 Potion::Potion(const string name, const int lifeeffect) 
-	:potionName(name), potionEffect(lifeeffect)
 {
-
+	potionName = name;
+	potionEffect = lifeeffect;
 }
 
 Potion::Potion(const Potion &src) 
-	:potionName(src.Name()), potionEffect(src.Effect())
 {
-
+	potionName = src.Name();
+	potionEffect = src.Effect();
 }
 
 string Potion::Name() const

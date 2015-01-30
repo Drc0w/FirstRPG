@@ -22,6 +22,33 @@ void PrintInformations(const Personnage *main, const Personnage *ennemy)
 	cout << ennemy->Name() << " has " << ennemy->RemainingLife() << "HP left" << endl;
 }
 
+
+void PrintListWeapon(struct list<Weapon> *listofweapons)
+{
+	int listcount = ListCountElements(listofweapons);
+	for (int i = 0; i < listcount; i++)
+	{
+		Weapon *weapon = ListElementAt(i, listofweapons);
+		cout << (i + 1 )<< ". Name: " << weapon->Name();
+		cout << "\tDamages: " << weapon->Damages();
+		cout << "\tLevel required: Level " << weapon->Level();
+		cout << endl;
+	}
+}
+
+void ChooseWeapon(Personnage *main, struct list<Weapon> *listofweapons)
+{
+	cout << "Which weapon do you want to use?" << endl;
+	PrintListWeapon(listofweapons);
+	int choice;
+	int count = ListCountElements(listofweapons);
+	do
+	{
+		cin >> choice;
+	} while (choice > count);
+	main->ChangeWeapon(ListElementAt(choice - 1, listofweapons));
+}
+
 void Fight(Personnage *main, Personnage *ennemy)
 {
 	ClearConsole();
@@ -59,7 +86,7 @@ void Fight(Personnage *main, Personnage *ennemy)
 						break;
 					case 3:
 						ClearConsole();
-						PrintListWeapon(weapons);
+						ChooseWeapon(main, weapons);
 						break;
 					default:
 						cin >> answer;
@@ -74,14 +101,4 @@ void Fight(Personnage *main, Personnage *ennemy)
 			ennemy->Attack(main);
 		}
 	} while(main->IsAlive() && ennemy->IsAlive());
-}
-
-void PrintListWeapon(struct list<Weapon> *listofweapons)
-{
-	int listcount = ListCountElements(listofweapons);
-	for (int i = 0; i < listcount; i++)
-	{
-		Weapon *weapon = ListElementAt(i, listofweapons);
-		cout << weapon->Name() << endl;
-	}
 }

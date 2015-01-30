@@ -16,7 +16,6 @@ class Personnage
 	~Personnage();
 	void TakeDamages(const int damages);
 	void DrinkPotion(const Potion potion);
-	//void ChangeWeapon(const std::string name, const int damages);
 	void ChangeWeapon(Weapon *weapon);
 	void Attack(Personnage *cible);
 	bool IsAlive() const;
@@ -34,8 +33,9 @@ class Personnage
 	std::string charName;
 	int charLevel;
 	int charExperience;
-	int charMaxLife;
+	int charMaxExperience;
 	int charLife;
+	int charMaxLife;
 	int charMana;
 	Weapon *charWeapon;
 };

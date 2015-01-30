@@ -4,18 +4,28 @@
 using namespace std;
 
 Personnage::Personnage(const string name) 
-	:charName(name), charLife(100), charMaxLife(100), charMana(100), charLevel(1), charExperience(0)
 {
+	charName = name;
+	charLevel = 1;
+	charExperience = 0;
+	charMaxExperience = 100;
+	charLife = 100;
+	charMaxLife = 100;
+	charMana = 199;
 	charWeapon = new Weapon();
 }
 
 Personnage::Personnage(const string name, const int level)
-	:charName(name), charLevel(level), charExperience(0)
 {
+	charName = name;
+	charLevel = level;
+	charExperience = 0;
+	charMaxExperience = 100;
 	charMaxLife = 100;
-	for (int i = 0; i < level; i++)
+	for (int i = 0; i < charLevel; i++)
 	{
 		charMaxLife *= 1.10;
+		charMaxExperience *= 1.50;
 	}
 	charMana = charMaxLife;
 	charLife = charMaxLife;
@@ -23,11 +33,24 @@ Personnage::Personnage(const string name, const int level)
 }
 
 Personnage::Personnage(const Personnage &src) 
-	:charName(src.Name()), charLife(src.RemainingLife()), charMaxLife(100), charMana(src.Mana()), 
-	charLevel(src.Level()), charExperience(src.Experience())
 {
-	Weapon *weapon = src.GetWeapon();
-	charWeapon = new Weapon(weapon->Name(), weapon->Damages(), weapon->Level());
+	charName = src.Name();
+	charLife = src.RemainingLife();
+	charMaxLife = 100;
+	charExperience = src.Experience();
+	charMaxExperience = 100;
+	for (int i = 0; i < charLevel; i++)
+	{
+		charMaxLife *= 1.10;
+		charMaxExperience *= 1.50;
+	}
+	charMana = src.Mana();
+	charWeapon = new Weapon(*(src.GetWeapon()));
+}
+
+Personnage::~Personnage()
+{
+	delete charWeapon;
 }
 
 void Personnage::TakeDamages(const int damages)
@@ -52,15 +75,6 @@ void Personnage::DrinkPotion(const Potion potion)
 	else if (charLife < 0)
 		charLife = 0;
 }
-
-/*
-void Personnage::ChangeWeapon(const std::string new_name, const int new_damages)
-{
-	charWeapon = new Weapon(new_name, new_damages);
-	cout << charName << " changed his weapon: " << charWeapon->Name();
-	cout << ", damages: " << charWeapon->Damages() << endl;
-}
-*/
 
 void Personnage::ChangeWeapon(Weapon *weapon)
 {
@@ -101,6 +115,16 @@ string Personnage::Name() const
 	return charName;
 }
 
+int Personnage::RemainingLife() const
+{
+	return charLife;
+}
+
+int Personnage::Mana() const
+{
+	return charMana;
+}
+
 int Personnage::Experience() const
 {
 	return charExperience;
@@ -111,16 +135,10 @@ int Personnage::Level() const
 	return charLevel;
 }
 
-int Personnage::Mana() const
+Weapon* Personnage::GetWeapon()  const
 {
-	return charMana;
+	return charWeapon;
 }
-
-int Personnage::RemainingLife() const
-{
-	return charLife;
-}
-
 void Personnage::WinExperience(const int xp)
 {
 	cout << charName << " wins " << xp << " XP" << endl;
@@ -143,14 +161,4 @@ void Personnage::LevelUp()
 		}
 			cout << Name() << " has reached level " << charLevel << endl;
 	}
-}
-
-Weapon* Personnage::GetWeapon()  const
-{
-	return charWeapon;
-}
-
-Personnage::~Personnage()
-{
-	delete charWeapon;
 }
