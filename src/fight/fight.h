@@ -6,8 +6,9 @@
 #include "../personnage/personnage.h"
 #include "../personnage/weapon.h"
 #include <cstdlib>
+#include <ctime>
 
 void ClearConsole();
-void Fight(Personnage *main, Personnage *ennemy);
+void FightManager(Personnage *mainChar);
 
 #endif

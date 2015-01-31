@@ -7,18 +7,21 @@
 
 using namespace std;
 
-int main()
+Personnage* CreateMainCharacter()
 {
 	ClearConsole();
 	cout << "Enter the name of your character: ";
 	string name;
 	cin >> name;
 	cout << endl;
-	Personnage *me, *him;
-	me = new Personnage(name, 3);
-	him = new Personnage("Gobelin");
-	Fight(me, him);
+	Personnage *mainChar = new Personnage(name);
+	return mainChar;
+}
+
+int main()
+{
+	Personnage *me = CreateMainCharacter();
+	FightManager(me);
 	delete me;
-	delete him;
 	return 0;
 }

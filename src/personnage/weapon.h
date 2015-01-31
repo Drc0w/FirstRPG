@@ -22,6 +22,8 @@ class Weapon
 	int weaponLevel;
 };
 
+bool operator==(const Weapon weapon1, const Weapon weapon2);
+bool operator!=(const Weapon weapon1, const Weapon weapon2);
 struct list<Weapon>* ListOfWeapon();
 
 #endif

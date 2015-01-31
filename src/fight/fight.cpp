@@ -13,7 +13,9 @@ void ClearConsole()
 
 void PrintInformations(const Personnage *main, const Personnage *ennemy)
 {
-	cout << main->Name() << " is fighting against " << ennemy->Name() << endl;
+	cout << main->Name() << '(' << main->Level() << ')';
+	cout << " is fighting against " << ennemy->Name() << '(' << ennemy->Level() << ')';
+	cout << endl;
 	Weapon *mainw = main->GetWeapon();
 	cout << main->Name() << " uses " << mainw->Name() << " and deals " << mainw->Damages() << endl;
 	Weapon *ennw = ennemy->GetWeapon();
@@ -23,42 +25,53 @@ void PrintInformations(const Personnage *main, const Personnage *ennemy)
 }
 
 
-void PrintListWeapon(struct list<Weapon> *listofweapons)
+Weapon* ChooseWeapon(Personnage *mainChar, struct list<Weapon> *listofweapons)
 {
 	int listcount = ListCountElements(listofweapons);
+	int show = 1;
+	int current = 1;
 	for (int i = 0; i < listcount; i++)
 	{
 		Weapon *weapon = ListElementAt(i, listofweapons);
-		cout << (i + 1 )<< ". Name: " << weapon->Name();
-		cout << "\tDamages: " << weapon->Damages();
-		cout << "\tLevel required: Level " << weapon->Level();
-		cout << endl;
+		if (*(mainChar->GetWeapon()) != *weapon)
+		{
+			cout << (show)<< ". Name: " << weapon->Name();
+			cout << "\tDamages: " << weapon->Damages();
+			cout << "\tLevel required: Level " << weapon->Level();
+			cout << endl;
+			show++;
+		}
+		else
+			current = i;
 	}
+	Weapon *charWeapon = mainChar->GetWeapon();
+	cout << (show) << ". Keep " << charWeapon->Name();
+	cout << "\tDamages: " << charWeapon->Damages();
+	cout << "\tLevel required: Level " << charWeapon->Level();
+	cout << endl;
+	int choice;
+	cin >> choice;
+	if (choice > current && choice < listcount && choice > 0)
+		return ListElementAt(choice, listofweapons);
+	else if (choice <= current && choice > 0)
+		return ListElementAt(choice - 1, listofweapons);
+	else
+		return NULL;
 }
 
-void ChooseWeapon(Personnage *main, struct list<Weapon> *listofweapons)
+void ChangeWeapon(Personnage *main, struct list<Weapon> *listofweapons)
 {
 	cout << "Which weapon do you want to use?" << endl;
-	PrintListWeapon(listofweapons);
-	int choice;
-	int count = ListCountElements(listofweapons);
-	do
-	{
-		cin >> choice;
-	} while (choice > count);
-	main->ChangeWeapon(ListElementAt(choice - 1, listofweapons));
+	Weapon *new_weapon = ChooseWeapon(main, listofweapons);
+	if (new_weapon != NULL)
+		main->ChangeWeapon(new_weapon);
 }
 
-void Fight(Personnage *main, Personnage *ennemy)
+void Fight(Personnage *main, Personnage *ennemy, struct list<Weapon> *availableweapons)
 {
 	ClearConsole();
-	struct list<Weapon> *weapons = ListOfWeapon();
 	cout << "Un " << ennemy->Name() << " apparait !" << endl;
 	cout << main->Name() << " en avant !" << endl;
-	cout << "Test de changement d'arme avec un niveau top élevé" << endl;
-	main->ChangeWeapon(new Weapon("Epée de ouf !!", 195, 20));
-	cout << "Test de changement d'arme avec un niveau correct" << endl;
-	main->ChangeWeapon(new Weapon("Dagounette", 10, 1));
 	do
 	{
 		int answer;
@@ -68,7 +81,7 @@ void Fight(Personnage *main, Personnage *ennemy)
 			cout << "What do you wanna do?" << endl;
 			cout << "1. Attack" << endl;
 			cout << "2. Show info" << endl;
-			cout << "3. Test affichage d'armes dans une liste" << endl;
+			cout << "3. Change weapon" << endl;
 			cin >> answer;
 			bool ctinue = false;
 			do
@@ -86,7 +99,7 @@ void Fight(Personnage *main, Personnage *ennemy)
 						break;
 					case 3:
 						ClearConsole();
-						ChooseWeapon(main, weapons);
+						ChangeWeapon(main, availableweapons);
 						break;
 					default:
 						cin >> answer;
@@ -101,4 +114,19 @@ void Fight(Personnage *main, Personnage *ennemy)
 			ennemy->Attack(main);
 		}
 	} while(main->IsAlive() && ennemy->IsAlive());
+}
+
+void FightManager(Personnage *mainChar)
+{
+	struct list<Weapon> *allweapons = ListOfWeapon();
+	struct list<Weapon> *availableweapons = NULL;
+	availableweapons = ListAdd(new Weapon(), availableweapons);
+	availableweapons = ListAdd(ListElementAt(1, allweapons), availableweapons);
+	do
+	{
+		Personnage *ennemy = new Personnage("Gobelin", 0);
+		Fight(mainChar, ennemy, availableweapons);
+		delete ennemy;
+	} while(mainChar->IsAlive());
+
 }

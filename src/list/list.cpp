@@ -20,6 +20,7 @@ template <class T>
 struct list<T>* ListAdd(T *element, struct list<T> *list)
 {
 	struct list<T> *l = list;
+	cout << (l == NULL) << endl;
 	if (l == NULL)
 	{
 		l = (struct list<T>*)malloc(sizeof(struct list<T>));
@@ -79,6 +80,16 @@ T* ListElementAt(int index, struct list<T> *list)
 	else
 		cout << index << " out of bounds in ElementAt(int index, struct list *list)" << endl;
 	return NULL;
+}
+
+template<class T>
+bool ListElementExists(T *element, struct list<T> *list)
+{
+	struct list<T> *l = list;
+	for (; l != NULL; l = l->next)
+		if (*(l->element) == *element)
+			return true;
+	return false;
 }
 
 #endif
