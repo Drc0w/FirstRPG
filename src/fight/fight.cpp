@@ -59,12 +59,14 @@ Weapon* ChooseWeapon(Personnage *mainChar, struct list<Weapon> *listofweapons)
 		return NULL;
 }
 
-void ChangeWeapon(Personnage *main, struct list<Weapon> *listofweapons)
+bool ChangeWeapon(Personnage *main, struct list<Weapon> *listofweapons)
 {
 	cout << "Which weapon do you want to use?" << endl;
 	Weapon *new_weapon = ChooseWeapon(main, listofweapons);
 	if (new_weapon != NULL)
-		main->ChangeWeapon(new_weapon);
+		return main->ChangeWeapon(new_weapon);
+	return false;
+
 }
 
 void Fight(Personnage *main, Personnage *ennemy, struct list<Weapon> *availableweapons)
@@ -75,6 +77,7 @@ void Fight(Personnage *main, Personnage *ennemy, struct list<Weapon> *availablew
 	do
 	{
 		int answer;
+		bool changedweapon = false;
 		if (main->IsAlive())
 		{
 			cout << endl;
@@ -99,7 +102,7 @@ void Fight(Personnage *main, Personnage *ennemy, struct list<Weapon> *availablew
 						break;
 					case 3:
 						ClearConsole();
-						ChangeWeapon(main, availableweapons);
+						changedweapon = ChangeWeapon(main, availableweapons);
 						break;
 					default:
 						cin >> answer;
@@ -109,7 +112,7 @@ void Fight(Personnage *main, Personnage *ennemy, struct list<Weapon> *availablew
 
 			} while(ctinue);
 		}
-		if (ennemy->IsAlive() && answer == 1)
+		if (ennemy->IsAlive() && (answer == 1 || (answer == 3 && changedweapon)))
 		{
 			ennemy->Attack(main);
 		}

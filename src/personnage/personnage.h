@@ -16,7 +16,7 @@ class Personnage
 	~Personnage();
 	void TakeDamages(const int damages);
 	void DrinkPotion(const Potion potion);
-	void ChangeWeapon(Weapon *weapon);
+	bool ChangeWeapon(Weapon *weapon);
 	void Attack(Personnage *cible);
 	bool IsAlive() const;
 	std::string Name() const;

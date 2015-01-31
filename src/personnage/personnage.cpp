@@ -76,18 +76,20 @@ void Personnage::DrinkPotion(const Potion potion)
 		charLife = 0;
 }
 
-void Personnage::ChangeWeapon(Weapon *weapon)
+bool Personnage::ChangeWeapon(Weapon *weapon)
 {
 	if (weapon->Level() <= charLevel)
 	{
 		charWeapon = weapon;
 		cout << charName << " changes his weapon: " << charWeapon->Name();
 		cout << ", damages: " << charWeapon->Damages() << endl;
+		return true;
 	}
 	else
 	{
 		cout << charName << " can't equip this weapon. " << charName; 
 		cout << " doesn't have the required level" << endl;
+		return false;
 	}
 }
 
