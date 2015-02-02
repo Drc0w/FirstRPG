@@ -13,7 +13,7 @@ class Spell
 	Spell(const std::string name, const int action);
 	Spell(const Spell &src);
 	std::string Name() const;
-	int Spell() const;
+	int Action() const;
 
 	private:
 	std::string spellName;
