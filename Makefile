@@ -13,8 +13,11 @@ obj/list.o obj/spell.o
 norule:
 	echo Specify all or clean
 
-all: $(OBJ)
-	$(CC) -o bin/FirstGame $^ $(CFLAGS)
+last: $(OBJ)
+	$(CC) -o bin/FirstGame $^ $(CFLAGES)
+
+all: clean 
+all: last
 
 clean: 
 	rm -f obj/*.o
@@ -31,5 +34,5 @@ $(OBJ):
 	$(CC) -o obj/potion.o -c src/personnage/potion.cpp $(CFLAGS)
 	$(CC) -o obj/fight.o -c src/fight/fight.cpp $(CLAGS)
 	$(CC) -o obj/list.o -c src/list/list.cpp $(CFLAGS)
-        $(CC) -o obj/spell.o -c src/personnage/spell.cpp $(CFLAGS)
+	$(CC) -o obj/spell.o -c src/personnage/spell.cpp $(CFLAGS)
 
