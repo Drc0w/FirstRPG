@@ -3,11 +3,12 @@ CFLAGS=-Wall -Wextra
 
 SRC=\
 src/main.cpp src/personnage/personnage.cpp src/personnage/weapon.cpp \
-src/personnage/potion.cpp src/fight/fight.cpp src/list/list.cpp
+src/personnage/potion.cpp src/fight/fight.cpp src/list/list.cpp \
+src/personnage/spell.cpp
 
 OBJ=\
 obj/main.o obj/personnage.o obj/weapon.o obj/potion.o obj/fight.o \
-obj/list.o
+obj/list.o obj/spell.o
 
 norule:
 	echo Specify all or clean
@@ -30,4 +31,5 @@ $(OBJ):
 	$(CC) -o obj/potion.o -c src/personnage/potion.cpp $(CFLAGS)
 	$(CC) -o obj/fight.o -c src/fight/fight.cpp $(CLAGS)
 	$(CC) -o obj/list.o -c src/list/list.cpp $(CFLAGS)
+        $(CC) -o obj/spell.o -c src/personnage/spell.cpp $(CFLAGS)
 
