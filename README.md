@@ -24,3 +24,6 @@ Coming soon...
 
 ##Spells
 Coming soon...
+
+##Links
+[ink to the project description (French)](http://85.170.182.155:81/decouverte-du-c.html)
