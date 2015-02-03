@@ -7,24 +7,27 @@ Spell::Spell()
 	spellName = "Petite boule de feu";
 	spellAction = TRUEDMG;
 	spellDamages = 5;
+	spellMana = 10;
 	//Par défaut il y a un sort actif qui fait 5 de dégâts, comme pour les armes
 }
 
-Spell::Spell(const string name, const ACTION action, const int level)
+Spell::Spell(const string name, const ACTION action, const int level, const int manacost)
 {
 	//Par défaut, pas de dégâts si pas spécifiés
 	spellName = name;
 	spellAction = action;
 	spellDamages = 0;
 	spellLevel = level;
+	spellMana = manacost;
 }
 
-Spell::Spell(const string name, const ACTION action, const int damages, const int level) 
+Spell::Spell(const string name, const ACTION action, const int damages, const int level, const int manacost) 
 {
 	spellName = name;
 	spellAction = action;
 	spellDamages = damages;
 	spellLevel = level;
+	spellMana = manacost;
 }
 
 Spell::Spell(const Spell &src) 
@@ -33,6 +36,7 @@ Spell::Spell(const Spell &src)
 	spellAction = src.Action();
 	spellDamages = src.Damages();
 	spellLevel = src.Level();
+	spellMana = src.ManaCost();
 }
 
 string Spell::Name() const
@@ -53,6 +57,11 @@ int Spell::Damages() const
 int Spell::Level() const
 {
 	return spellLevel;
+}
+
+int Spell:ManaCost() const
+{
+	return spellMana;
 }
 
 struct list<Spell>* ListOfSpell()

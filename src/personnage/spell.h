@@ -18,19 +18,22 @@ class Spell
 	public:
 
 	Spell();
-	Spell(const std::string name, const ACTION action, const int level);
-	Spell(const std::string name, const ACTION action, const int damages, const int level);
+	Spell(const std::string name, const ACTION action, const int level, const int manacost);
+	Spell(const std::string name, const ACTION action, const int damages, const int level, 
+		const int manacost);
 	Spell(const Spell &src);
 	std::string Name() const;
 	ACTION Action() const;
 	int Damages() const;
 	int Level() const;
+	int Manaost() const;
 
 	private:
 	std::string spellName;
 	ACTION spellAction;
 	int spellDamages;
 	int spellLevel;
+	int spellMana;
 };
 
 struct list<Spell>* ListOfSpell();
