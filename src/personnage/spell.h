@@ -5,21 +5,36 @@
 #include <string>
 #include "../list/list.h"
 
+#define ACTION int
+#define TRUEDMG 0
+#define ARMORDMG 1
+#define WEAPONDMG 2
+#define BLOCKSPELL 3
+#define LIFESTEAL 4
+#define HEAL 5
+
 class Spell
 {
 	public:
 
 	Spell();
-	Spell(const std::string name, const int action);
+	Spell(const std::string name, const ACTION action, const int level);
+	Spell(const std::string name, const ACTION action, const int damages, const int level);
 	Spell(const Spell &src);
 	std::string Name() const;
-	int Action() const;
+	ACTION Action() const;
+	int Damages() const;
+	int Level() const;
 
 	private:
 	std::string spellName;
-	int spellAction;
+	ACTION spellAction;
+	int spellDamages;
+	int spellLevel;
 };
 
 struct list<Spell>* ListOfSpell();
+
+bool operator==(Spell spell1, Spell spell2);
 
 #endif
