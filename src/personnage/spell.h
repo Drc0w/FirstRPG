@@ -26,7 +26,7 @@ class Spell
 	ACTION Action() const;
 	int Damages() const;
 	int Level() const;
-	int Manaost() const;
+	int ManaCost() const;
 
 	private:
 	std::string spellName;
