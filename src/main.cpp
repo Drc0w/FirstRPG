@@ -10,11 +10,21 @@ using namespace std;
 Personnage* CreateMainCharacter()
 {
 	ClearConsole();
+	cout << "+--------------------+" << endl;
+	cout << "|   Choose a class   |" << endl;
+	cout << "+--------------------+" << endl;
+	cout << "1. Warrior\t2.Wizzard" << endl;
+	int type;
+	cin >> type;
+	if (type == 2)
+		type = 1;
+	else
+		type = 0;
 	cout << "Enter the name of your character: ";
 	string name;
 	cin >> name;
 	cout << endl;
-	Personnage *mainChar = new Personnage(name);
+	Personnage *mainChar = new Personnage(name, type);
 	return mainChar;
 }
 

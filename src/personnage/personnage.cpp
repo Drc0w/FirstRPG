@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Personnage::Personnage(const string name) 
+Personnage::Personnage(const string name, const CLASS type) 
 {
 	charName = name;
 	charLevel = 1;
@@ -11,11 +11,13 @@ Personnage::Personnage(const string name)
 	charMaxExperience = 100;
 	charLife = 100;
 	charMaxLife = 100;
-	charMana = 199;
+	charMana = 100;
+	charClass = type;
 	charWeapon = new Weapon();
+	charSpell = new Spell();
 }
 
-Personnage::Personnage(const string name, const int level)
+Personnage::Personnage(const string name, const int level, const CLASS type)
 {
 	charName = name;
 	charLevel = level;
@@ -30,6 +32,7 @@ Personnage::Personnage(const string name, const int level)
 	charMana = charMaxLife;
 	charLife = charMaxLife;
 	charWeapon = new Weapon();
+	charClass = type;
 }
 
 Personnage::Personnage(const Personnage &src) 
@@ -46,11 +49,14 @@ Personnage::Personnage(const Personnage &src)
 	}
 	charMana = src.Mana();
 	charWeapon = new Weapon(*(src.GetWeapon()));
+	charSpell = new Spell(*(src.GetSpell()));
+	charClass = src.Class();
 }
 
 Personnage::~Personnage()
 {
 	delete charWeapon;
+	delete charSpell;
 }
 
 void Personnage::TakeDamages(const int damages)
@@ -137,9 +143,19 @@ int Personnage::Level() const
 	return charLevel;
 }
 
+CLASS Personnage::Class() const
+{
+	return charClass;
+}
+
 Weapon* Personnage::GetWeapon()  const
 {
 	return charWeapon;
+}
+
+Spell* Personnage::GetSpell() const
+{
+	return charSpell;
 }
 void Personnage::WinExperience(const int xp)
 {

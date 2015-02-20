@@ -127,7 +127,7 @@ void FightManager(Personnage *mainChar)
 	availableweapons = ListAdd(ListElementAt(1, allweapons), availableweapons);
 	do
 	{
-		Personnage *ennemy = new Personnage("Gobelin", 0);
+		Personnage *ennemy = new Personnage("Gobelin", 0, Warrior);
 		Fight(mainChar, ennemy, availableweapons);
 		delete ennemy;
 	} while(mainChar->IsAlive());
